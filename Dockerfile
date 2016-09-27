@@ -17,4 +17,7 @@ RUN pip install ansible
 RUN mkdir -p /etc/ansible \
     && echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts
 
+COPY initctl_custom .
+RUN chmod +x initctl_custom && rm -fr /sbin/initctl && ln -s /initctl_custom /sbin/initctl
+
 CMD /bin/sh
