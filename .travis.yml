@@ -1,15 +1,14 @@
----
-
 env:
-  - distro: debianjessie85
-    init: /sbin/init
-
+- distro: debianjessie85
+  init: "/sbin/init"
 services:
-  - docker
-
+- docker
 script:
-  - container_id=$(mktemp)
-  - 'docker build -t container_under_test .'
-  - 'docker run --detach container_under_test "${init}" > "${container_id}"'
-  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible --version'
-  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible all -m ping'
+- container_id=$(mktemp)
+- docker build -t container_under_test .
+- docker run --detach container_under_test "${init}" > "${container_id}"
+- docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible --version
+- docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible all -m ping
+notifications:
+  slack:
+    secure: ZEkm9SA82hO0BgDd9O2DFIOQM0lCvxWNDTJgct3j5WDBD3Wf12QGTFQqQrNNDXjTvsM3yOOkYMaf/RjXXL7YgN5f0wEDq3zjIZoJZPXA17r6F8HbFyFOyjHPBHq4v810BNgFvF9rC7M8DsRa7iS1fx8u3wOCdp3lWtCau0Wmkdj7jAvRjp1i21N1q89W71aOz3UEQ8H/Erq4q36OBceH83f08SXyWRJkqzUI4xHH+YStwsph58o9pL6BCIVja4NdDIvjeOL71PNptqealLBQhTCunZY5793B+mK3bCPlC+Hg8ORb86VG4ex6l7OIiro1k+ZCNAqxUYozkwNmw/YLXlvpa8CxHWKjrZhuThIbiqMoz/eIq+RVnBH8vlR281/qqO328J9ulB8XUSUohLdwJ+E5z3XdOcgQKR0J0hYYogPpm4sP9eTAR8LHpoQb/ejY7q7sVMqJ7dzAJsGHHJZduOlM6jZ/KVKhE8PUs1RDwgbakQcoqOOwxcCJLFK8471KaD0dDUuz7oG+WQ+NUT42jadzBcs1lq5rcrlnm0zTJR+U1z1r1MvGtwv1srHa7ksO/9/jnMr09hRWjpUIBFLYOVE1CG9uOjpvycTIwcqt4GHtcZTfVZ8Wgwju9JejKpJPCnERNT8Xx3VvQX9iPZqUiFUHtrT+/qZRI7duPxJcKxU=
