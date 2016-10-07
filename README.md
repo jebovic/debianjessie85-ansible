@@ -5,7 +5,7 @@ How to Use
 ----------
 
 ```
-docker run -t -i jebovic/debianjessie85-ansible
+docker run -t -i jebovic/debianjessie-ansible
 ```
 
 Notes
